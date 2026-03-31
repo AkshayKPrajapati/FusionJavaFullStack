@@ -1,0 +1,39 @@
+Question 1: What is JDBC and its benefits?
+Answer: JDBC (Java Database Connectivity) is an API in Java that provides methods for executing SQL statements and accessing any tabular data as a database. It offers a set of classes and interfaces that enable Java applications to interact with databases.
+
+Benefits of JDBC:
+1. Database Independence: Write once, run anywhere
+2. Type Safety: Compile-time checking
+3. Performance: Direct SQL execution
+4. Rich API: Comprehensive database operations
+5. Connection Pooling: Efficient resource management
+
+Question 2: Why do we need JDBC?
+Answer: JDBC is needed to:
+1. Connect to databases
+2. Execute SQL queries
+3. Process results
+4. Handle transactions
+5. Manage connections efficiently
+
+
+Question 3: Why we store in database?
+Answer: We store data in databases because:
+1. Persistence: Data survives application restarts
+2. Data Integrity: Ensures accuracy and consistency
+3. Concurrent Access: Multiple users can access simultaneously
+4. Security: Controlled access and authentication
+5. Scalability: Handle large amounts of data
+6. Querying: Efficient data retrieval and manipulation
+7. Backup and Recovery: Data protection mechanisms
+
+Question 4: Why we not store in file?
+Answer: We don't store data in files because:
+1. No concurrent access
+2. No data integrity
+3. No security
+4. No scalability
+5. No efficient querying
+6. No backup and recovery
+7. No transaction support
+
