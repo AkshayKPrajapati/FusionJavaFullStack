@@ -6,5 +6,10 @@ public class Main {
         for (int number : numbers) {
             System.out.println(number);
         }
+
+        String[] names = {"John", "Jane", "Jim", "Jill"};
+        for (String name : names) {
+            System.out.println(name);
+        }
     }
 }
