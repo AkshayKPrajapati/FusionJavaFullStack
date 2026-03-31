@@ -37,3 +37,28 @@ Answer: We don't store data in files because:
 6. No backup and recovery
 7. No transaction support
 
+Question 5: What is JDBC API?
+Answer: JDBC API is a set of classes and interfaces that provide a standard way to access databases from Java applications. It consists of two layers:
+1. JDBC API: Provides a set of classes and interfaces for database connectivity
+2. JDBC Driver API: Provides a set of classes and interfaces for database drivers
+
+
+Question 6: What are the different types of JDBC drivers?
+Answer: There are four types of JDBC drivers:
+1. Type 1: JDBC-ODBC Bridge Driver -> Bridge between JDBC and ODBC
+2. Type 2: Native API Driver -> Native API for database access
+3. Type 3: Network Protocol Driver -> Network protocol for database access
+4. Type 4: Pure Java Driver -> Pure Java for database access -> every  database wander design  
+
+Question 7: what is driver?
+Answer: A driver is a software component that enables communication between a database and an application. It translates SQL statements into database-specific commands.
+
+Question 8: what is driver manager?
+Answer: A driver manager is a class that manages JDBC drivers. It is responsible for loading and registering drivers, and creating connections to databases.
+
+Question 9: what is drawback of JDBC-ODBC bridge driver?
+Answer: there are 2 main drawbacks:
+1. Platform dependent - only works on Windows operating system
+2. Performance overhead - adds an extra layer (ODBC) between JDBC and database, resulting in slower performance compared to pure JDBC drivers
+
+
