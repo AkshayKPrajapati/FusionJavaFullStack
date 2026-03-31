@@ -1,0 +1,33 @@
+1. Create a classs BankAccount having the member as given below:
+AccountNumber   --> Integer
+AccountHolderName --> String
+AccountType --> String("Savings", "Current")
+AccountBalance --> float
+
+
+Include following methods:
+void deposit(float amount)
+void withdraw(float amount)
+float checkBalance()
+
+
+deposit(float amount) : method allow you to credit an amount into the current account balance ,if amount is negative , throw an exception NegativeAmountException to block the operation from being performed.
+
+
+withdraw(float amount) : method allow you to debit an amount from the current account balance ,Please ensure minimum balance of 1000 is maintained in the account for savings account and 5000 for current account,else throw an exception InsufficientFundsException and block the withdraw operation. Also throw an exception NegativeAmountException to block the operation from being performed if amount is negative.
+
+getBalance() : method return the current account balance. If account balance is negative, throw an exception NegativeBalanceException. if you have 1000 or below for savings account or 5000 or below for current account, throw an exception LowBalanceException.
+
+
+Have constructor to which you will pass the account holder name, account type, and account balance. 
+Before creating the object (constructor), check whether the balance is less than 1000 for savings account, and 5000 for current account. If so, raise a LowBalanceException.
+Also, check whether the balance is negative. If so, raise a NegativeBalanceException.
+
+Design menu driven application , menu will be as follows:
+1. Create Account
+2. Deposit
+3. Withdraw
+4. Check Balance
+5. Exit
+
+Make sure that BankAccount details will be stored in a collection.
