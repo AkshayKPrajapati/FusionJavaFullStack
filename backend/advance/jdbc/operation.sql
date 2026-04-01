@@ -8,10 +8,8 @@ name varchar(20),
 salary decimal(10,2)
 );
 
-INSERT INTO 016_25batch.employee
-(
-id, name, salary
-)
-VALUES (
-113, 'Poonam', 4582233.36
-);
+INSERT INTO 016_25batch.employee(id, name, salary)
+VALUES (113, 'Poonam', 4582233.36);
+
+select * from employee;
+
