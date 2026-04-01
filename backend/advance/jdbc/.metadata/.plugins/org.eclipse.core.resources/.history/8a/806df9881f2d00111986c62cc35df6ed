@@ -1,0 +1,21 @@
+package com.jdbc;
+import java.lang.*;
+
+public class GetEmployeeRecords {
+	public final static String MYSQLDRIVER="com.mysql.jdbc.Driver";
+	public final static String URL="jdbc:mysql://localhost:3306/016_25batch";
+	
+	public static void main(String []args) {
+		
+		try {
+			//load Driver
+			Class.forName("com.mysql.jdbc.Driver");
+			String username="root";
+			String password="local";
+			System.out.println("Driver loaded..");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
