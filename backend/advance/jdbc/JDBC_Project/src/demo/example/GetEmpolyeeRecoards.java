@@ -36,29 +36,22 @@ public class GetEmpolyeeRecoards {
 				System.out.println("Id: "+resultSet.getInt(1));//column Index
 				System.out.println("Name : "+resultSet.getString(2));//column Index
 				System.out.println("Salary : "+resultSet.getFloat("salary"));//Column Name
-				
-				
 				System.out.println("--------------");
-				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//step 7 .close the connection
-		finally
-		{
-			try
-			{
-				if(connection!=null)
-				{
+		finally{
+			try{
+				if(connection!=null){
 					connection.close();
 				}
 			}
-			catch (SQLException e)
-			{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			catch (SQLException e){
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}

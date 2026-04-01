@@ -62,11 +62,18 @@ Answer: there are 2 main drawbacks:
 2. Performance overhead - adds an extra layer (ODBC) between JDBC and database, resulting in slower performance compared to pure JDBC drivers
 
 
+Question 11: what is the drowbacks of Native API driver?
+Answer: there are 2 main drawbacks:
+1. Platform dependent - only works on Windows operating system
+2. Performance overhead - adds an extra layer (Native API) between JDBC and database, resulting in slower performance compared to pure JDBC drivers
 
 
+Question 12: what is the drowbacks of Network Protocol driver?
+Answer : here is only one drowbacks , always need third party software to connect to the database or middleware server to connect with database
 
 
-
+Question 13:Pure Java Driver or Thin Driver?
+Answer : Pure Java Driver or Thin Driver is a type of JDBC driver that is written entirely in Java and does not require any native code or third-party software to connect to the database.There are no drawback yet.
 
 package demo.example;
 
@@ -186,3 +193,18 @@ Id: 117
 Name : Ravi
 Salary : 8000000.0
 --------------
+
+
+Question 14: What is the difference between execute() and executeQuery() methods in Statement class?
+Answer : 
+
+The execute() : this method is used to execute any SQL statement,
+return boolean value
+
+The executeQuery() : this method is used to execute SELECT statements only. return ResultSet object;
+ResultSet resultSet = statement.executeQuery(sql);
+
+The executeUpdate() : this method is used to execute INSERT, UPDATE, DELETE statements. return int value;
+int rowCount = statement.executeUpdate(sql);
+
+
