@@ -46,16 +46,20 @@ public class GetEmpolyeeRecoards {
 			e.printStackTrace();
 		}
 		//step 7 .close the connection
-		finally {
-			
-				try {
-					if(connection!=null) {
+		finally
+		{
+			try
+			{
+				if(connection!=null)
+				{
 					connection.close();
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
+			catch (SQLException e)
+			{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
 	}
 }
