@@ -16,3 +16,5 @@ insert into employee(id, name, salary) values(117, 'Ravi', 8000000.00);
 
 
 select * from employee;
+truncate table employee;
+
