@@ -20,6 +20,7 @@ public class GetEmployeeRecords {
 			Connection connection = DriverManager.getConnection(URL, username, password);
 			System.out.println("Connected with databasae : "+connection);
             
+			System.out.println("Database name: " + connection.getMetaData().getDatabaseProductName());
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
