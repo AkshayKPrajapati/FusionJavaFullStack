@@ -408,4 +408,27 @@ Answer :
 Statement is used to execute SQL queries statically.
 CallableStatement is used to execute stored procedures in the database.
 
+Question : difference between Statement and PreparedStatement?
+Answer : 
+Statement is used to execute SQL queries statically.
+PreparedStatement is used to execute SQL queries dynamically.
+
+
+Question : difference between PreparedStatement and CallableStatement?
+Answer : 
+PreparedStatement is used to execute SQL queries dynamically.
+eg 
+String sql = "insert into employee(id, name, salary) values(?, ?, ?)";
+PreparedStatement preparedStatement = connection.prepareStatement(sql);
+preparedStatement.setInt(1, 1);
+preparedStatement.setString(2, "John");
+preparedStatement.setFloat(3, 1000);
+preparedStatement.executeUpdate();
+
+CallableStatement is used to execute stored procedures in the database.
+eg 
+String sql = "{call getEmployee()}";
+CallableStatement callableStatement = connection.prepareCall(sql);
+callableStatement.execute();
+
 
