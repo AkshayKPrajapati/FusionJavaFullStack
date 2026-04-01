@@ -15,12 +15,12 @@ public class GetEmpolyeeRecoards {
 			System.out.println("Driver class loaded!!");
 			
 			//step 2.Connection Establish to the database
-			String url="jdbc:mysql://localhost:3306/016_25batch";
+			String url="jdbc:mysql://localhost:3306/016_25batch";//url https://www.nehapune.com/016_Batch
 			String username="root";
 			String password="local";
 			
 			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connection establish successfully");
+			DebugLog.successLog("Connection establish successfully");
 			
 			//step 3. write a SQL Query
 			String sql = "select * from employee";
@@ -36,7 +36,7 @@ public class GetEmpolyeeRecoards {
 				System.out.println("Id: "+resultSet.getInt(1));//column Index
 				System.out.println("Name : "+resultSet.getString(2));//column Index
 				System.out.println("Salary : "+resultSet.getFloat("salary"));//Column Name
-				System.out.println("--------------");
+				System.out.println("--------------");  
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
