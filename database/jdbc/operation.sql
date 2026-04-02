@@ -19,7 +19,7 @@ select * from employee;
 truncate table employee;
 
 select * from employee where id=1001;
-update employee set salary=salary+100000 where id=1001;
+update employee set salary=salary+100000 where id=1001; -- update query
 
-delete from employee where id=1001;
+delete from employee where id=1001; -- delete query
 DELETE FROM `016_25batch`.`employee` WHERE (`id` = '1001');

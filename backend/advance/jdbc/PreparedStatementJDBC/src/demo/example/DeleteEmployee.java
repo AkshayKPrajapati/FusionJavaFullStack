@@ -25,18 +25,32 @@ public class DeleteEmployee {
 			System.out.println("db connected Successfully !!");
 			
 			//write a query
-			String sql = "DELETE FROM employee` WHERE id = ?";
+			String sql = "DELETE FROM employee WHERE id = ?";
 			
 			//Associate with Query
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			
 			//Execute Query
+			preparedStatement.setInt(1, empId);
 			int row = preparedStatement.executeUpdate();
 			
+			if(row>0) {
+				System.out.println("Employee id "+ empId + "has been deleted ..");
+			}
 			
 		} catch (ClassNotFoundException |SQLException e ) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			//close the resource
+			try {
+				if(connection!=null) {
+					connection.close();//close the connection
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
