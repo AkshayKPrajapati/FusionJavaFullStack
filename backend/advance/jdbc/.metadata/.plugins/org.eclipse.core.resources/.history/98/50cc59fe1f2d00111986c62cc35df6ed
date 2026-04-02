@@ -1,0 +1,26 @@
+public class TerminalLog {
+    public static final String ERROR = "\u001B[31m";//Red
+    public static final String RESET = "\u001B[0m";//Reset
+    public static final String SUCCESS = "\u001B[32m";//Green
+    public static final String INFO = "\u001B[34m";//Blue
+    public static final String WARNING = "\u001B[33m";//Yellow
+    public  static void successLog(String message)
+    {
+        System.out.println(SUCCESS + message + RESET);//Prints in green color
+    }
+    
+    public static void errorLog(String message)
+    {
+        System.out.println(ERROR + message + RESET);
+    }
+    
+    public static void infoLog(String message)
+    {
+        System.out.println(INFO + message + RESET);
+    }
+    
+    public static void warningLog(String message)
+    {
+        System.out.println(WARNING + message + RESET);
+    }
+}

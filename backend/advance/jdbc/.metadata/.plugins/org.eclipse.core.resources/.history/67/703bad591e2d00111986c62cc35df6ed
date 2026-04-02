@@ -1,0 +1,17 @@
+package com.jdbc;
+
+public class GetEmployeeRecords {
+	public final static String MYSQLDRIVER="com.mysql.jdbc.Driver";
+	public static void main(String []args) {
+		
+		
+		try {
+			//load Driver
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver loaded..");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
