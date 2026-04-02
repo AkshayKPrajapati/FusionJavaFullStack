@@ -62,3 +62,448 @@ Answer: there are 2 main drawbacks:
 2. Performance overhead - adds an extra layer (ODBC) between JDBC and database, resulting in slower performance compared to pure JDBC drivers
 
 
+Question 11: what is the drowbacks of Native API driver?
+Answer: there are 2 main drawbacks:
+1. Platform dependent - only works on Windows operating system
+2. Performance overhead - adds an extra layer (Native API) between JDBC and database, resulting in slower performance compared to pure JDBC drivers
+
+
+Question 12: what is the drowbacks of Network Protocol driver?
+Answer : here is only one drowbacks , always need third party software to connect to the database or middleware server to connect with database
+
+
+Question 13:Pure Java Driver or Thin Driver?
+Answer : Pure Java Driver or Thin Driver is a type of JDBC driver that is written entirely in Java and does not require any native code or third-party software to connect to the database.There are no drawback yet.
+
+package demo.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class GetEmpolyeeRecoards {
+	public static void main(String [] args) {
+		Connection connection=null;
+		try {
+			//step 1.load Driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Driver class loaded!!");
+			
+			//step 2.Connection Establish to the database
+			String url="jdbc:mysql://localhost:3306/016_25batch";
+			String username="root";
+			String password="local";
+			
+			connection = DriverManager.getConnection(url, username, password);
+			System.out.println("Connection establish successfully");
+			
+			//step 3. write a SQL Query
+			String sql = "select * from employee";
+			
+			//step 4.Associate Query with connection
+			Statement statement = connection.createStatement();
+			
+			//step 5.Execute Query
+			ResultSet resultSet = statement.executeQuery(sql);
+			
+			//step 6. Iteration the data
+			while(resultSet.next()) {
+				System.out.println("Id: "+resultSet.getInt(1));//column Index
+				System.out.println("Name : "+resultSet.getString(2));//column Index
+				System.out.println("Salary : "+resultSet.getFloat("salary"));//Column Name
+				
+				
+				System.out.println("--------------");
+				
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//step 7 .close the connection
+		finally
+		{
+			try
+			{
+				if(connection!=null)
+				{
+					connection.close();
+				}
+			}
+			catch (SQLException e)
+			{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+output:
+Driver class loaded!!
+Connection establish successfully
+Id: 101
+Name : Akshay
+Salary : 785968.0
+--------------
+Id: 103
+Name : Amit
+Salary : 48000.75
+--------------
+Id: 105
+Name : Nishu
+Salary : 820000.0
+--------------
+Id: 106
+Name : Chavan
+Salary : 1500000.0
+--------------
+Id: 109
+Name : Aman
+Salary : 450003.0
+--------------
+Id: 110
+Name : Tej
+Salary : 48000.0
+--------------
+Id: 112
+Name : Pooja
+Salary : 458.36
+--------------
+Id: 113
+Name : Poonam
+Salary : 4582233.5
+--------------
+Id: 114
+Name : Akshay
+Salary : 5000000.0
+--------------
+Id: 115
+Name : Rahul
+Salary : 6000000.0
+--------------
+Id: 116
+Name : Raj
+Salary : 7000000.0
+--------------
+Id: 117
+Name : Ravi
+Salary : 8000000.0
+--------------
+
+
+Question 14: What is the difference between execute() and executeQuery() methods in Statement class?
+Answer : 
+
+The execute() : this method is used to execute any SQL statement,
+return boolean value
+
+The executeQuery() : this method is used to execute SELECT statements only. return ResultSet object;
+ResultSet resultSet = statement.executeQuery(sql);
+
+The executeUpdate() : this method is used to execute INSERT, UPDATE, DELETE statements. return int value;
+int rowCount = statement.executeUpdate(sql);
+
+Question : How to check the data is inserted or not?
+Answer : 
+We can check the data is inserted or not by using the executeUpdate() method. If the data is inserted successfully, it will return 1, otherwise it will return 0.
+
+int row = statement.executeUpdate(sql);
+if(row>0) {
+	DebugLog.successLog("Employee Details inserted Successfully  !!");
+}
+else {
+	DebugLog.failLog("Employee Details not inserted !!");
+}
+
+
+package demo.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class InsertEmpolyeeDetails {
+	public static void main(String[] args) {
+		Connection connection=null;
+		try {
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter the Empolyee Details : ");
+			System.out.println("Enter the Emp Id : ");
+			int empId = scanner.nextInt();
+			
+			System.out.println("Enter the Name: ");
+			scanner.nextLine();
+			String name = scanner.nextLine();
+			
+			System.out.println("Enter the salary");
+			float salary = scanner.nextFloat();
+			
+			//load the Driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//establish connection with database
+			String url="jdbc:mysql://localhost:3306/016_25batch";//url https://www.nehapune.com/016_Batch
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected succesfully!!");
+			
+			//write SQL Query
+			String sql = "insert into employee(id, name, salary) values("+empId+", '"+name+"', "+salary+")";
+			
+			//Associate Query with connection
+			Statement statement = connection.createStatement();
+			
+			//Execute Query
+			int row = statement.executeUpdate(sql);
+			if(row>0) {
+				//System.out.println("Employee Details inserted Successfully  !!");
+				DebugLog.successLog("Employee Details inserted Successfully  !!");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection!=null) {
+					connection.close();//close the resource 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}
+
+Question : How to insert data dynamically?
+Answer : We can insert data dynamically by using the Scanner class.
+
+
+Question : How many ways are there to insert data?
+Answer : There are two ways to insert data:
+1. Static way
+2. Dynamic way
+
+Question : What is the difference between static and dynamic way?
+Answer : 
+Static way : We can insert data statically by using the values directly in the SQL query.
+Dynamic way : We can insert data dynamically by using the Scanner class.
+
+Question : What is the use of Scanner class?
+Answer : 
+Scanner class is used to take input from the user.
+
+Question: What is Statement?
+Answer : 
+Statement is an interface in JDBC API which is used to execute SQL queries.
+
+Qurstion : How many statements are there in JDBC?
+Answer : 
+There are three types of statements in JDBC:
+1. Statement
+2. PreparedStatement
+3. CallableStatement
+
+
+Question : What is the difference between Statement and PreparedStatement?
+Answer : 
+Statement is used to execute SQL queries statically.
+eg 
+String sql = "insert into employee(id, name, salary) values(1, 'John', 1000)";
+
+
+PreparedStatement is used to execute SQL queries dynamically.
+eg 
+String sql = "insert into employee(id, name, salary) values(?, ?, ?)";
+PreparedStatement preparedStatement = connection.prepareStatement(sql);
+preparedStatement.setInt(1, 1);
+preparedStatement.setString(2, "John");
+preparedStatement.setFloat(3, 1000);
+preparedStatement.executeUpdate();
+
+package demo.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class InsertEmployeeDetailsPreparedStatement {
+	public static void main(String[] args) {
+		Connection connection=null;
+		try {
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter the Empolyee Details : ");
+			System.out.println("Enter the Emp Id : ");
+			int empId = scanner.nextInt();
+			
+			System.out.println("Enter the Name: ");
+			scanner.nextLine();
+			String name = scanner.nextLine();
+			
+			System.out.println("Enter the salary");
+			float salary = scanner.nextFloat();
+			
+			//load the Driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//establish connection with database
+			String url="jdbc:mysql://localhost:3306/016_25batch";//url https://www.nehapune.com/016_Batch
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected Successfully !!");
+			
+			//write SQL Query
+			String sql = "insert into employee(id, name, salary) values(?,?,?)";
+			
+			//Associate Query with connection
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			
+			//Execute Query
+			preparedStatement.setInt(1, empId);
+			preparedStatement.setString(2, name);
+			preparedStatement.setFloat(3, salary);
+			int row = preparedStatement.executeUpdate();
+			if(row>0) {
+				System.out.println("Employee Details inserted Successfully  !!");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection!=null) {
+					connection.close();//close the resource 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}
+
+package demo.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class UpdateEmployee {
+	public static void main(String[] args) {
+		Connection connection=null;
+		try {
+			//load Driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//establish connection with database
+			String url="jdbc:mysql://localhost:3306/016_25batch";//url https://www.nehapune.com/016_Batch
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected Successfully !!");
+			
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter the EMP ID : ");
+			int empId = scanner.nextInt();
+			
+			//write a Query
+			String sql = "select * from employee where id=?";
+			
+			//Associate with Query
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			
+			//Execute Query
+			preparedStatement.setInt(1, empId);
+			
+			//Iterate the data
+			  ResultSet resultSet = preparedStatement.executeQuery();
+			  
+			  if(resultSet.next()) {
+				  String update = "update employee set salary=salary+100000 where id=?";
+				  PreparedStatement ps = connection.prepareStatement(update);
+				  ps.setInt(1, empId);
+				  int resultValue = ps.executeUpdate();
+				  
+				  if(resultValue>0) {
+					  System.out.println("updated ....");
+				  }else {
+					  System.out.println("does not updated...");
+				  }
+			  }else {
+				  System.out.println("Empolyee ID "+empId+ "does not found");
+			  }
+		}catch(ClassNotFoundException | SQLException exception) {
+			exception.printStackTrace();
+		} finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+db connected Successfully !!
+Enter the EMP ID : 
+1001
+updated ....
+
+
+
+Question : What is CallableStatement?
+Answer : 
+CallableStatement is used to execute stored procedures in the database.
+eg 
+String sql = "{call getEmployee()}";
+CallableStatement callableStatement = connection.prepareCall(sql);
+callableStatement.execute();
+
+Question : What is the difference between Statement and CallableStatement?
+Answer : 
+Statement is used to execute SQL queries statically.
+CallableStatement is used to execute stored procedures in the database.
+
+Question : difference between Statement and PreparedStatement?
+Answer : 
+Statement is used to execute SQL queries statically.
+PreparedStatement is used to execute SQL queries dynamically.
+
+
+Question : difference between PreparedStatement and CallableStatement?
+Answer : 
+PreparedStatement is used to execute SQL queries dynamically.
+eg 
+String sql = "insert into employee(id, name, salary) values(?, ?, ?)";
+PreparedStatement preparedStatement = connection.prepareStatement(sql);
+preparedStatement.setInt(1, 1);
+preparedStatement.setString(2, "John");
+preparedStatement.setFloat(3, 1000);
+preparedStatement.executeUpdate();
+
+CallableStatement is used to execute stored procedures in the database.
+eg 
+String sql = "{call getEmployee()}";
+CallableStatement callableStatement = connection.prepareCall(sql);
+callableStatement.execute();
+
+
