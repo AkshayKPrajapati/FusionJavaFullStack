@@ -23,3 +23,23 @@ update employee set salary=salary+100000 where id=1001; -- update query
 
 delete from employee where id=1001; -- delete query
 DELETE FROM `016_25batch`.`employee` WHERE (`id` = '1001');
+
+-- store procedure 
+DELIMITER //
+
+CREATE PROCEDURE getemployeeInfoById(
+    IN emp_id INT,
+    OUT emp_name VARCHAR(20),
+    OUT emp_salary DECIMAL(10,2)
+)
+BEGIN
+    SELECT name, salary
+    INTO emp_name, emp_salary
+    FROM employee
+    WHERE id = emp_id;
+END //
+
+DELIMITER ;
+-- call function
+CALL getemployeeInfoById(1003, @name, @salary);
+SELECT @name, @salary;
