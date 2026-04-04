@@ -43,3 +43,5 @@ DELIMITER ;
 -- call function
 CALL getemployeeInfoById(1003, @name, @salary);
 SELECT @name, @salary;
+
+
