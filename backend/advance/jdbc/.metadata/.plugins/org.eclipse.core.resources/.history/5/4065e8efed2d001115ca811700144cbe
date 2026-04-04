@@ -1,0 +1,62 @@
+package demo.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class InsertEmpolyeeDetails {
+	public static void main(String[] args) {
+		Connection connection=null;
+		try {
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter the Empolyee Details : ");
+			System.out.println("Enter the Emp Id : ");
+			int empId = scanner.nextInt();
+			
+			System.out.println("Enter the Name: ");
+			scanner.nextLine();
+			String name = scanner.nextLine();
+			
+			System.out.println("Enter the salary");
+			float salary = scanner.nextFloat();
+			
+			//load the Driver
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//establish connection with database
+			String url="jdbc:mysql://localhost:3306/016_25batch";//url https://www.nehapune.com/016_Batch
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected succesfully!!");
+			
+			//write SQL Query
+			String sql = "insert into employee(id, name, salary) values("+empId+", '"+name+"', "+salary+")";
+			
+			//Associate Query with connection
+			Statement statement = connection.createStatement();
+			
+			//Execute Query
+			int row = statement.executeUpdate(sql);
+			if(row>0) {
+				//System.out.println("Employee Details inserted Sucessfully !!");
+				DebugLog.successLog("Employee Details inserted Sucessfully !!");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection!=null) {
+					connection.close();//close the resource 
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}
