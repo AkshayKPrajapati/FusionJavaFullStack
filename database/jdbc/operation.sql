@@ -45,3 +45,4 @@ CALL getemployeeInfoById(1003, @name, @salary);
 SELECT @name, @salary;
 
 
+-- Alter table employee add constraint primary key (id);

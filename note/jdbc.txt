@@ -575,5 +575,387 @@ Enter the Emp Id :
 1003
 db connected Successfully !!
 Employee Id 1003
-Name Neha
+Name varsha
 salary: 202500.0
+
+Q. what is the difference between statement and prepared statement?
+A. Statement is used to execute SQL queries statically.
+   PreparedStatement is used to execute SQL queries dynamically.
+
+Q. What is the MetaData?
+A. It is used to get the information about the database and the tables in the database.
+
+
+Q. How to get the MetaData?
+A. DatabaseMetaData databaseMetaData = connection.getMetaData();
+   ResultSet resultSet = databaseMetaData.getTables(null, null, null, null);
+   while(resultSet.next()) {
+       System.out.println(resultSet.getString(3));
+   }
+
+Q. what is DatabaseMetaData<?>
+A. DatabaseMetaData is used to get the information about the database and the tables in the database.
+   > It is used to get the information about the database.
+   > It is used to get the information about the tables in the database.
+
+Q. How to get the DatabaseMetaData?
+A. DatabaseMetaData databaseMetaData = connection.getMetaData();
+   ResultSet resultSet = databaseMetaData.getTables(null, null, null, null);
+   while(resultSet.next()) {
+       System.out.println(resultSet.getString(3));
+   }
+
+Q. What is ResultSetMetaData?
+A. ResultSetMetaData is used to get the information about the result set.
+   > It is used to get the information about the result set.
+   > It is used to get the information about the result set.
+
+Q. How to get the ResultSetMetaData?
+A. ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+   while(resultSet.next()) {
+       System.out.println(resultSet.getString(3));
+   }
+
+Q. What is the difference between DatabaseMetaData and ResultSetMetaData?
+A. DatabaseMetaData is used to get the information about the database and the tables in the database.
+   ResultSetMetaData is used to get the information about the result set.
+package com.demo;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DatabaseMetaDataDemo {
+	public static void main(String[] args) {
+		Connection connection =null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/016_25batch";
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected");
+			
+			DatabaseMetaData data=connection.getMetaData();
+			String name = data.getDatabaseProductName();
+			System.out.println("Database Product Name : "+name);
+			
+			System.out.println("Database Product Version : "+data.getDatabaseProductVersion());
+			System.out.println("Database Driver Name : "+data.getDriverName());
+			System.out.println("Databse Driver Version : "+data.getDriverVersion());
+			System.out.println("URL : "+data.getURL());
+			System.out.println("Username : "+data.getUserName());
+			System.out.println("KeyWord: "+ data.getSQLKeywords());
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+db connected
+Database Product Name : MySQL
+Database Product Version : 8.0.43
+Database Driver Name : MySQL Connector/J
+Databse Driver Version : mysql-connector-j-9.0.0 (Revision: e0e8e3461e5257ba4aa19e6b3614a2685b298947)
+URL : jdbc:mysql://localhost:3306/016_25batch
+Username : root@localhost
+KeyWord: ACCESSIBLE,ADD,ANALYZE,ASC,BEFORE,CASCADE,CHANGE,CONTINUE,DATABASE,DATABASES,DAY_HOUR,DAY_MICROSECOND,DAY_MINUTE,DAY_SECOND,DELAYED,DESC,DISTINCTROW,DIV,DUAL,ELSEIF,EMPTY,ENCLOSED,ESCAPED,EXIT,EXPLAIN,FIRST_VALUE,FLOAT4,FLOAT8,FORCE,FULLTEXT,GENERATED,GROUPS,HIGH_PRIORITY,HOUR_MICROSECOND,HOUR_MINUTE,HOUR_SECOND,IF,IGNORE,INDEX,INFILE,INT1,INT2,INT3,INT4,INT8,IO_AFTER_GTIDS,IO_BEFORE_GTIDS,ITERATE,JSON_TABLE,KEY,KEYS,KILL,LAG,LAST_VALUE,LEAD,LEAVE,LIMIT,LINEAR,LINES,LOAD,LOCK,LONG,LONGBLOB,LONGTEXT,LOOP,LOW_PRIORITY,MASTER_BIND,MASTER_SSL_VERIFY_SERVER_CERT,MAXVALUE,MEDIUMBLOB,MEDIUMINT,MEDIUMTEXT,MIDDLEINT,MINUTE_MICROSECOND,MINUTE_SECOND,NO_WRITE_TO_BINLOG,NTH_VALUE,NTILE,OPTIMIZE,OPTIMIZER_COSTS,OPTION,OPTIONALLY,OUTFILE,PURGE,READ,READ_WRITE,REGEXP,RENAME,REPEAT,REPLACE,REQUIRE,RESIGNAL,RESTRICT,RLIKE,SCHEMA,SCHEMAS,SECOND_MICROSECOND,SEPARATOR,SHOW,SIGNAL,SPATIAL,SQL_BIG_RESULT,SQL_CALC_FOUND_ROWS,SQL_SMALL_RESULT,SSL,STARTING,STORED,STRAIGHT_JOIN,TERMINATED,TINYBLOB,TINYINT,TINYTEXT,UNDO,UNLOCK,UNSIGNED,USAGE,USE,UTC_DATE,UTC_TIME,UTC_TIMESTAMP,VARBINARY,VARCHARACTER,VIRTUAL,WHILE,WRITE,XOR,YEAR_MONTH,ZEROFILL
+
+
+
+
+package com.demo;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ResultSetMetaDataDemo {
+	public static void main(String[] args) {
+		Connection connection =null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/016_25batch";
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			System.out.println("db connected");
+			
+			String sql="select * from employee";
+			Statement st = connection.createStatement();
+			ResultSet resultSet = st.executeQuery(sql);
+			ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+			System.out.println(("Column Count : "+resultSetMetaData.getColumnCount()));
+			for(int i=1;i<resultSetMetaData.getColumnCount();i++) {
+				System.out.println(resultSetMetaData.getColumnName(i)+" : "+resultSetMetaData.getColumnTypeName(i));
+			}
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+package com.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class TransactionManagementDemo {
+	public static void main(String[] args) {
+		Connection connection=null;
+		try {
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter Employee Details");
+			System.out.println("Enter ID : ");
+			int empId = scanner.nextInt();
+			
+			scanner.nextLine();
+			System.out.println("Enter Employee Name :");
+			String empName=scanner.nextLine();
+			
+			System.out.println("Enter Salary : ");
+			float empSalary=scanner.nextFloat();
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url="jdbc:mysql://localhost:3306/016_25Batch";
+			String username="root";
+			String password="local";
+			connection=DriverManager.getConnection(url, username, password);
+			//set Auto Commit false
+			connection.setAutoCommit(false);
+			
+			String sql="insert into employee(id, name, salary) values(?,?,?)";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, empId);
+			preparedStatement.setString(2, empName);
+			preparedStatement.setFloat(3, empSalary);
+			
+			preparedStatement.executeUpdate();
+			
+			System.out.println("Do you really want to insert a record (yes/no) ?");
+			String input=scanner.next();
+			
+			if(input.equalsIgnoreCase("yes")) {
+				connection.commit();
+				System.out.println("Employee Record Inserted Successfully");
+			} else {
+				connection.rollback();
+				System.out.println("failed");
+			}
+			
+		} catch (ClassNotFoundException  | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if(connection!=null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+Enter Employee Details
+Enter ID : 
+1006
+Enter Employee Name :
+GeetA
+Enter Salary : 
+25986.36
+Do you really want to insert a record (yes/no) ?
+yes
+Employee Record Inserted Successfully
+
+
+Q. What is Transaction Management?
+A. Transaction Management is a process of managing the transactions in a database.
+   It ensures that the transactions are executed in a consistent and reliable manner.
+   It also ensures that the transactions are executed in a way that maintains the integrity of the database.
+
+Q. What are the methods of Transaction Management?
+A. The methods of Transaction Management are:
+   1. setAutoCommit() - This method is used to set the auto commit property of the connection.
+   2. commit() - This method is used to commit the transaction.
+   3. rollback() - This method is used to rollback the transaction.
+
+
+Q. What is the use of setAutoCommit() method?
+A. The use of setAutoCommit() method is to set the auto commit property of the connection.
+   It is used to control whether the transactions are automatically committed or not.
+   If the auto commit property is set to true, then the transactions are automatically committed.
+   If the auto commit property is set to false, then the transactions are not automatically committed.
+   In this case, we need to manually commit or rollback the transactions.
+
+Q. What is the use of commit() method?
+A. The use of commit() method is to commit the transaction.
+   It is used to save the changes made to the database.
+   If the commit() method is not called, then the changes made to the database will not be saved.
+
+Q. What is the use of rollback() method?
+A. The use of rollback() method is to rollback the transaction.
+   It is used to undo the changes made to the database.
+   If the rollback() method is not called, then the changes made to the database will not be undone.
+
+Q. What is the RowSet ?
+A. RowSet is an interface that represents a row of data from a database table.
+> it can be scrollable and updatable
+
+> it is connected Architecture
+
+Q. What is connection Architecture?
+A. A connection architecture means that the application keeps a constant connection to the database throughout its lifetime. This means that you don't need to establish a new connection every time you want to interact with the database. Instead, you can just reuse the existing connection. This makes the application more efficient and saves time. In other words, you can just keep the connection open and use it whenever you need to interact with the database.
+   
+   
+Q. What is disconnected Architecture?
+A. A disconnected architecture means that the application does not maintain a constant connection to the database. Instead, it establishes a connection only when it needs to interact with the database. Once the interaction is complete, the connection is closed. This approach is useful when the application does not need to interact with the database frequently.
+
+
+
+package com.demo;
+
+import java.sql.SQLException;
+import javax.sql.rowset.JdbcRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
+
+public class JdbcRowSetDemo {
+    public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            RowSetFactory rowSetFactory = RowSetProvider.newFactory();
+            JdbcRowSet jdbcRowSet = rowSetFactory.createJdbcRowSet();
+
+            jdbcRowSet.setUrl("jdbc:mysql://localhost:3306/016_25Batch");
+            jdbcRowSet.setUsername("root");
+            jdbcRowSet.setPassword("local");
+
+            jdbcRowSet.setCommand("SELECT * FROM employee");
+            jdbcRowSet.execute();
+            
+           
+            System.out.println("Employee Details");//0-1
+            while (jdbcRowSet.next()) {//forward direction
+            	System.out.println("Id : "+jdbcRowSet.getInt(1));
+            	System.out.println("Name : "+jdbcRowSet.getString(2) );
+            	System.out.println("salary : "+jdbcRowSet.getFloat(3));
+            	System.out.println("------------------------");
+               
+            }
+            System.out.println("Employee Details from the last (9-1)");
+            jdbcRowSet.afterLast();//TO move remove pointer the last records
+            while (jdbcRowSet.previous()) {//Backward direction
+            	System.out.println("Id : "+jdbcRowSet.getInt(1));
+            	System.out.println("Name : "+jdbcRowSet.getString(2) );
+            	System.out.println("salary : "+jdbcRowSet.getFloat(3));
+            	System.out.println("------------------------");
+               
+            }
+            
+            jdbcRowSet.absolute(5);//To move rowset pointer to the 5th record.
+            System.out.println("5th Record Details");
+            System.out.println("Id : "+jdbcRowSet.getInt(1));
+        	System.out.println("Name : "+jdbcRowSet.getString(2) );
+        	System.out.println("salary : "+jdbcRowSet.getFloat(3));
+            System.out.println("Application End ..");
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+Employee Details
+Id : 113
+Name : Poonam
+salary : 4582233.5
+------------------------
+Id : 1001
+Name : Neha
+salary : 202500.0
+------------------------
+Id : 1002
+Name : Sonam
+salary : 45963.69
+------------------------
+Id : 1003
+Name : varsha
+salary : 10025.36
+------------------------
+Id : 1004
+Name : vivek
+salary : 52369.32
+------------------------
+Id : 1005
+Name : Ajay
+salary : 18000.63
+------------------------
+Id : 1006
+Name : GeetA
+salary : 25986.36
+------------------------
+Employee Details from the last (9-1)
+Id : 1006
+Name : GeetA
+salary : 25986.36
+------------------------
+Id : 1005
+Name : Ajay
+salary : 18000.63
+------------------------
+Id : 1004
+Name : vivek
+salary : 52369.32
+------------------------
+Id : 1003
+Name : varsha
+salary : 10025.36
+------------------------
+Id : 1002
+Name : Sonam
+salary : 45963.69
+------------------------
+Id : 1001
+Name : Neha
+salary : 202500.0
+------------------------
+Id : 113
+Name : Poonam
+salary : 4582233.5
+------------------------
+5th Record Details
+Id : 1004
+Name : vivek
+salary : 52369.32
+Application End ..
