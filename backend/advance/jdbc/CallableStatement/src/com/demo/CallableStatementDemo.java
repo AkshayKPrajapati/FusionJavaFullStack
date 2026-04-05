@@ -33,7 +33,7 @@ public class CallableStatementDemo {
 			
 			CallableStatement callableStatement = connection.prepareCall(sql);
 			
-			callableStatement.setInt(1, 1001);
+			callableStatement.setInt(1, empId);
 			callableStatement.registerOutParameter(2, Types.VARCHAR);
 			callableStatement.registerOutParameter(3, Types.FLOAT);
 			
