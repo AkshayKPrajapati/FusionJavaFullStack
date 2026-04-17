@@ -1,0 +1,67 @@
+Q. What is Data ?   
+Ans . Data is nothing but raw  information of the object.
+example : 
+- Student Name : John
+- Student Age : 20
+- Student Gender : Male
+- Student Address : New York
+- Student Phone : 1234567890
+- Student Email : john@gmail.com
+
+Q. What is Information ?
+Ans . Information is nothing but processed data.
+example : 
+- Student Name : John
+- Student Age : 20
+- Student Gender : Male
+- Student Address : New York
+- Student Phone : 1234567890
+- Student Email : john@gmail.com
+
+Q. how many types of data?
+Ans . There are two types of data:
+1. Structured Data
+2. Unstructured Data
+
+Q. What is Structured Data?
+Ans . Structured Data is nothing but organized data in tabular form.
+or //
+data is in the table format. known as structured data.
+example : 
+- Student Name : John
+- Student Age : 20
+- Student Gender : Male
+- Student Address : New York
+- Student Phone : 1234567890
+- Student Email : john@gmail.com
+
+Q. What is Unstructured Data?
+Ans . Unstructured Data is nothing but unorganized data in non-tabular form.
+or //
+
+data is not present in the table format. known as unstructured data.
+example : 
+- Student Name : John
+- Student Age : 20
+- Student Gender : Male
+- Student Address : New York
+- Student Phone : 1234567890
+- Student Email : john@gmail.com
+
+Q. What is table?
+Ans . Table is nothing but a collection of row and column.
+
+Q. What is row?
+Ans . Row is nothing but a horizontal line in a table.
+
+Q. What is column?
+Ans . Column is nothing but a vertical line in a table.
+
+Q. What is a database?
+Answer . A database is an organized collection of data that is stored and managed so it can be easily accessed, updated, and retrieved.
+Q. Where is data stored in a database?
+Answer . Data in a database is stored in a structured way, usually like this:
+
+Tables → Main place where data is stored
+Rows (records) → Each row represents one item (e.g., one student)
+Columns (fields) → Each column represents a type of information (e.g., name, age)
