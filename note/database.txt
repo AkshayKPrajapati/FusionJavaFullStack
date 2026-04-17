@@ -65,3 +65,9 @@ Answer . Data in a database is stored in a structured way, usually like this:
 Tables → Main place where data is stored
 Rows (records) → Each row represents one item (e.g., one student)
 Columns (fields) → Each column represents a type of information (e.g., name, age)
+Example:
+A Student table might look like:
+| ID | Name | Age |
+| -- | ---- | --- |
+| 1  | Ravi | 20  |
+| 2  | Anya | 21  |
