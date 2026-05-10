@@ -55,3 +55,41 @@ CREATE TABLE employeeFussion (
         FOREIGN KEY (manager_id)
         REFERENCES employeeFussion(emp_id)
 );
+ 
+-- craete product tabel
+create table product(
+	product_id int primary key,
+    product_name varchar (20) not null,
+    product_price decimal(10,2),
+    produce_create timestamp
+);
+
+-- create order table 
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+
+    order_status ENUM(
+        'pending',
+        'confirmed',
+        'processing',
+        'packed',
+        'shipped',
+        'out_for_delivery',
+        'delivered',
+        'cancelled',
+        'returned',
+        'refunded',
+        'failed',
+        'ordernow'
+    ),
+
+    customer_id INT,
+    CONSTRAINT orders_customer_fk
+        FOREIGN KEY (customer_id)
+        REFERENCES customer(customer_id),
+
+    product_id INT,
+    CONSTRAINT orders_product_fk
+        FOREIGN KEY (product_id)
+        REFERENCES product(product_id)
+);
