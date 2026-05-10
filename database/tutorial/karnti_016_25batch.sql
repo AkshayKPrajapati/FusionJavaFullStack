@@ -12,3 +12,12 @@ create table student (
     gender enum('Male','Female','Other'),
     age int check(age>=18)
 );
+
+-- create customer table 
+create table customer(
+	customer_id int primary key,
+	customer_name varchar(255) not null,
+    customer_mob bigint not null,
+    customer_email varchar(255) not null,
+    customer_address varchar(255) default'Pune'
+);
