@@ -21,3 +21,11 @@ create table customer(
     customer_email varchar(255) not null,
     customer_address varchar(255) default'Pune'
 );
+
+-- create location table 
+create table location (
+	location_id int primary key,
+    city varchar(20),
+    state varchar(20),
+    pin_code char(6)
+)
