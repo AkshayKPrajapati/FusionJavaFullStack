@@ -28,4 +28,30 @@ create table location (
     city varchar(20),
     state varchar(20),
     pin_code char(6)
-)
+);
+
+-- create department table
+create table department(
+	dept_id int primary key,
+    dept_name varchar(20) not null,
+    loc_id int ,
+    constraint dept_loc_fk foreign key(loc_id) references location(location_id)
+);
+
+
+-- create table employeeFussion
+CREATE TABLE employeeFussion (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(15) NOT NULL,
+    salary CHAR(8),
+    
+    dept_id INT,
+    CONSTRAINT empfusion_dept_fk
+        FOREIGN KEY (dept_id)
+        REFERENCES department(dept_id),
+    
+    manager_id INT,
+    CONSTRAINT empfusion_manager_fk
+        FOREIGN KEY (manager_id)
+        REFERENCES employeeFussion(emp_id)
+);
